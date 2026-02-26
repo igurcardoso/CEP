@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BuscaCEP do Igor</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/202/202640.png" type="image/x-icon">
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -26,51 +27,53 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
-<body class="min-h-screen bg-gray-50 dark:bg-brand-dark text-gray-800 dark:text-gray-200 transition-colors duration-500 font-sans relative overflow-x-hidden flex items-center justify-center p-4 sm:p-8">
+<body class="min-h-screen bg-gray-50 dark:bg-brand-dark text-gray-800 dark:text-gray-200 transition-colors duration-500 font-sans relative overflow-x-hidden flex items-center justify-center p-4 sm:p-8 pt-20">
 
     <div class="fixed top-[-10%] left-[-10%] w-96 h-96 bg-red-600/30 dark:bg-red-600/20 rounded-full blur-[100px] pointer-events-none"></div>
     <div class="fixed bottom-[-10%] right-[-10%] w-[30rem] h-[30rem] bg-rose-800/20 dark:bg-red-900/20 rounded-full blur-[120px] pointer-events-none"></div>
 
-    <button onclick="toggleTheme()" class="absolute top-6 right-6 p-3 rounded-full bg-white/10 dark:bg-black/20 backdrop-blur-md border border-gray-200/50 dark:border-white/10 shadow-lg hover:scale-110 transition-transform z-50 text-brand-red">
+    <button onclick="toggleTheme()" class="fixed top-4 right-4 sm:top-8 sm:right-8 p-3 rounded-full bg-white/50 dark:bg-black/40 backdrop-blur-md border border-gray-200/50 dark:border-white/10 shadow-lg hover:scale-110 transition-transform z-50 text-brand-red">
         <i class="ph ph-moon text-2xl dark:hidden block"></i>
         <i class="ph ph-sun text-2xl hidden dark:block"></i>
     </button>
 
-    <main class="relative z-10 w-full max-w-lg flex flex-col gap-8">
+    <main class="relative z-10 w-full max-w-5xl grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
         
-        <div class="text-center space-y-2">
-            <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-400 bg-clip-text text-transparent">
-                Busca<span class="text-brand-red">CEP</span> <span class="text-2xl sm:text-3xl font-light">do Igor</span>
-            </h1>
-            <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 font-light">
-                Descubra qualquer endereço do Brasil em milissegundos.
-            </p>
+        <div class="flex flex-col gap-8">
+            <div class="text-center lg:text-left space-y-2">
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-400 bg-clip-text text-transparent">
+                    Busca<span class="text-brand-red">CEP</span> <span class="text-2xl sm:text-3xl lg:text-4xl font-light">do Igor</span>
+                </h1>
+                <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 font-light">
+                    Descubra qualquer endereço do Brasil em milissegundos.
+                </p>
+            </div>
+
+            <div class="bg-white/40 dark:bg-black/40 backdrop-blur-xl border border-white/50 dark:border-white/10 p-6 sm:p-8 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.5)] transition-all">
+                <form onsubmit="obterCEP(event)" class="flex flex-col gap-5">
+                    <div class="flex flex-col gap-2">
+                        <label for="input_cep" class="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 flex items-center gap-2">
+                            <i class="ph ph-map-pin"></i> Informe seu CEP
+                        </label>
+                        <input 
+                            type="text" 
+                            id="input_cep" 
+                            name="input_cep" 
+                            placeholder="Ex: 01001-000"
+                            maxlength="9"
+                            class="w-full bg-white/50 dark:bg-white/5 border border-gray-300 dark:border-white/10 text-gray-900 dark:text-white rounded-xl p-4 outline-none focus:ring-2 focus:ring-brand-red focus:border-transparent transition-all placeholder-gray-400 dark:placeholder-gray-600 text-lg tracking-widest font-mono shadow-inner"
+                            required
+                        >
+                    </div>
+                    
+                    <button type="submit" class="w-full bg-brand-red hover:bg-rose-700 text-white font-semibold rounded-xl p-4 transition-all duration-300 hover:shadow-[0_0_20px_rgba(225,29,72,0.4)] hover:-translate-y-1 flex justify-center items-center gap-2 active:scale-95">
+                        <i class="ph ph-magnifying-glass text-xl"></i> Buscar Endereço
+                    </button>
+                </form>
+            </div>
         </div>
 
-        <div class="bg-white/40 dark:bg-black/40 backdrop-blur-xl border border-white/50 dark:border-white/10 p-6 sm:p-8 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.5)] transition-all">
-            <form onsubmit="obterCEP(event)" class="flex flex-col gap-5">
-                <div class="flex flex-col gap-2">
-                    <label for="input_cep" class="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 flex items-center gap-2">
-                        <i class="ph ph-map-pin"></i> Informe seu CEP
-                    </label>
-                    <input 
-                        type="text" 
-                        id="input_cep" 
-                        name="input_cep" 
-                        placeholder="Ex: 01001-000"
-                        maxlength="9"
-                        class="w-full bg-white/50 dark:bg-white/5 border border-gray-300 dark:border-white/10 text-gray-900 dark:text-white rounded-xl p-4 outline-none focus:ring-2 focus:ring-brand-red focus:border-transparent transition-all placeholder-gray-400 dark:placeholder-gray-600 text-lg tracking-widest font-mono shadow-inner"
-                        required
-                    >
-                </div>
-                
-                <button type="submit" class="w-full bg-brand-red hover:bg-rose-700 text-white font-semibold rounded-xl p-4 transition-all duration-300 hover:shadow-[0_0_20px_rgba(225,29,72,0.4)] hover:-translate-y-1 flex justify-center items-center gap-2 active:scale-95">
-                    <i class="ph ph-magnifying-glass text-xl"></i> Buscar Endereço
-                </button>
-            </form>
-        </div>
-
-        <div class="bg-white/40 dark:bg-black/40 backdrop-blur-xl border border-white/50 dark:border-white/10 p-6 rounded-3xl shadow-xl transition-all">
+        <div class="bg-white/40 dark:bg-black/40 backdrop-blur-xl border border-white/50 dark:border-white/10 p-6 sm:p-8 rounded-3xl shadow-xl transition-all h-full flex flex-col justify-center">
             <dl class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 
                 <div class="col-span-1 sm:col-span-2 bg-white/50 dark:bg-white/5 p-4 rounded-xl border border-gray-200 dark:border-white/5">
@@ -103,16 +106,13 @@
     </main>
 
     <script>
-        // Função para alternar o tema Dark/Light
         function toggleTheme() {
             document.documentElement.classList.toggle('dark');
         }
 
-        // Lógica do ViaCEP (Mantida exatamente como você pediu)
         async function obterCEP(event){
             event.preventDefault()
 
-            // Limpeza básica do valor para evitar erros na API se o usuário digitar traços
             let cep = event.target.input_cep.value.replace(/\D/g, '');
 
             if(cep.length !== 8) {
@@ -120,7 +120,6 @@
                 return;
             }
 
-            // Opcional: Feedback visual de carregamento
             document.getElementById("rua").innerText = "Buscando...";
 
             try {
@@ -133,8 +132,8 @@
 
                 document.getElementById("rua").innerText = dados.logradouro || "Não informado";
                 document.getElementById("bairro").innerText = dados.bairro || "Não informado";
-                document.getElementById("cidade").innerText = dados.localidade || dados.cidade || "Não informado"; // ViaCEP usa 'localidade'
-                document.getElementById("estado").innerText = dados.uf || dados.estado || "Não informado"; // ViaCEP usa 'uf'
+                document.getElementById("cidade").innerText = dados.localidade || dados.cidade || "Não informado"; 
+                document.getElementById("estado").innerText = dados.uf || dados.estado || "Não informado"; 
                 document.getElementById("regiao").innerText = dados.regiao || "Não informado"; 
             } catch (error) {
                 document.getElementById("rua").innerText = "CEP não encontrado";
